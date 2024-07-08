@@ -23,6 +23,16 @@ jobs:
           name: performance_data
           path: perf_check*.txt 
 
+      - name: Get Current Job Log URL
+        uses: Tiryoh/gha-jobid-action@v0
+        id: jobs
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          job_name: ${{ github.job }}
+
+      - name: Output Current Job ID
+        run: echo ${{ steps.jobs.outputs.job_id }}
+
       - name: Find previous successful run
         id: prev_success_run
         run: |
